@@ -11,25 +11,34 @@ pd.set_option('display.max_colwidth',None)
 dec=input('Please enter DEL or Del or del if you would like to delete a booking,if not please enter Start or START or start')
    
 def Hotelpicker():
-    print('What hotel would you like to book')
-    print('please choose from the options below')
+    print('What hotel would you like to book? ')
+    print('please choose from the options below: ')
     print(Hotel_Databasei)
-    hotel=(input('Enter Room code of the hotel you would like to book'))
-    name = input("Enter your name")
-    day = int((input('The number of days you would like to stay')))
-    price= Hotel_Databasei.at[hotel,'cost']
-    print('The amount needed per day',price)
-    bookings['Sales'] = [name]
-    bookings['Days'] = [day]
-    bookings['Amount paid'] =[price*day]
-    bookings['Hotel'] = [hotel]
-    print('Your booking details are\n',bookings[bookings['Sales']==name])
+    hotel=input('Enter Room code of the hotel you would like to book: ')
+    status=Hotel_Databasei.at[hotel,'Status']
+    if status=='BOOKED':
+         print('This hotel is already booked, please try again...')
+         Hotelpicker()
+    else:
+        name = input("Enter your name: ")
+        day = int((input('The number of days you would like to stay: ')))
+        price= int(Hotel_Databasei.at[hotel,'cost'])
+        print('The amount needed is',price*day)
+        bookings['Sales'] = [name]
+        bookings['Days'] = [day]
+        bookings['Amount paid'] =[price*day]
+        bookings['Hotel'] = [hotel]
+        print('Your booking details are\n',bookings[bookings['Sales']==name])
+
+    
+    
 def deleter():
     y=input('Please enter Del or DEL or del to cancel a booking')
     if y=='DEL' or y=='Del' or y=='del':
         c=input('Enter your name exactly as it was entered prior')
         bookings.drop(bookings.index[bookings['Sales']==c])
         print('your booking has been sucessfully deleted')
+        
     else:
         print('Please try again')
 def sales():
@@ -39,10 +48,10 @@ def sales():
         Months=['Quarter 1','Quarter 2','Quarter 3','Quarter 4']
         type=input('Enter bar if you would like to see it as a bar graph\nEnter line if you would like to see it as a line graph\nEnter scatter if you would like to see it as a scatter chart')
         if type=='bar'or type=='Bar' or type=='BAR':
-            plt.plot(Months,SALES)
+            plt.bar(Months,SALES)
             plt.show()
         elif type=='line'or type=='LINE'or type=='Line':
-            plt.bar(Months,SALES)
+            plt.plot(Months,SALES)
             plt.show()
         elif type=='scatter'or type=='SCATTER' or type=='Scatter':
             plt.scatter(Months,SALES)
