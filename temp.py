@@ -29,7 +29,7 @@ def Hotelpicker():
         bookings['Amount paid'] =[price*day]
         bookings['Hotel'] = [hotel]
         print('Your booking details are\n',bookings[bookings['Sales']==name])
-        Hotel_Databasei.loc[hotel,'Status']=['BOOKED']
+        Hotel_Database.loc[hotel,'Status']=['BOOKED']
 
     
     
@@ -66,6 +66,7 @@ elif dec=='Start'or dec=='START' or dec=='start':
     Hotelpicker()
     sales()
     bookings.to_csv("C:\\Users\\siddh\\Downloads\\bookings.csv")
+    Hotel_Database.to_csv("C:\\Users\\siddh\\Downloads\\IP IP.csv")
       
 else:
     print('Enter a valid input')
