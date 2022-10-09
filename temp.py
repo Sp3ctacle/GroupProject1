@@ -66,6 +66,6 @@ elif dec=='Start'or dec=='START' or dec=='start':
     Hotelpicker()
     sales()
     bookings.to_csv("C:\\Users\\siddh\\Downloads\\bookings.csv")
-    Hotel_Databasei.to_csv("
+      
 else:
     print('Enter a valid input')
